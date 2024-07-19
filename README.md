@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/react-declarative-lite.svg?style=flat-square)](https://npmjs.org/package/react-declarative-lite)
 
-![meme](./meme.png)
+![meme](https://github.com/react-declarative/react-declarative/blob/HEAD/meme.png)
 
 This is a lighter version of [react-declarative](https://www.npmjs.com/package/react-declarative) which exports the `<One />` component and dependencies only and as such makes the library slightly faster and smaller. Unlike `react-declarative`, it doesn't provide any additional overhead like state management. For a note, that library should be used when you want to use `<One />` forms in existing app
 
