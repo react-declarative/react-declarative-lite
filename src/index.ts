@@ -1,4 +1,4 @@
-export { ISize } from './model/ISize';
+export type { ISize } from './model/ISize';
 
 import { TypedField as TypedFieldInternal } from './model/TypedField';
 import { IValidation as IValidationInternal } from './model/IValidation';
@@ -70,7 +70,8 @@ export type ITile<RowData extends IRowData = any, Payload extends IAnything = IA
 export { default as dayjs } from 'dayjs';
 
 export { InfiniteView } from './components';
-export { SearchView, ISearchItem } from './components';
+export { SearchView } from './components';
+export type { ISearchItem } from './components';
 export { VirtualView, VIRTUAL_VIEW_ROOT, VIRTUAL_VIEW_CHILD } from './components';
 
 export { ActionButton } from './components';
@@ -204,7 +205,7 @@ export { getFieldsError } from './utils/getFieldsError';
 
 export { isInvalidFieldData } from './utils/isInvalidFieldData';
 
-import TSubjectInternal from './model/TSubject';
+import type TSubjectInternal from './model/TSubject';
 import TBehaviorSubjectInternal from './model/TBehaviorSubject';
 import TObserverInternal, { TObservable as TObservableInternal } from './model/TObserver';
 

@@ -1,5 +1,7 @@
 import Observer, { TObserver, LISTEN_CONNECT } from "../Observer";
 
+declare var setTimeout: any;
+
 /**
  * Creates an observer that emits a value after a specified delay.
  *
@@ -7,7 +9,7 @@ import Observer, { TObserver, LISTEN_CONNECT } from "../Observer";
  * @returns - The observer that emits values after the specified delay.
  */
 export const fromInterval = (delay: number): TObserver<number> => {
-    let timeout: NodeJS.Timer;
+    let timeout: ReturnType<typeof setTimeout>;
     let iterationIdx = 0;
     const observer = new Observer<number>(() => {
         if (timeout !== undefined) {

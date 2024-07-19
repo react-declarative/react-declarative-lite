@@ -1,6 +1,6 @@
 import EventEmitter from "./EventEmitter";
 
-import TObserver from "../../model/TObserver";
+import type TObserver from "../../model/TObserver";
 
 import compose from '../compose';
 import sleep from "../sleep";
@@ -17,6 +17,8 @@ const DISCONNECT_EVENT = Symbol('observer-disconnect');
 
 export const LISTEN_CONNECT = Symbol('observer-connect-listen');
 export const LISTEN_DISCONNECT = Symbol('observer-disconnect-listen');
+
+declare var setTimeout: any;
 
 type Fn = (...args: any[]) => void;
 
@@ -423,7 +425,7 @@ export class Observer<Data = any> implements TObserver<Data> {
      */
     public repeat = (interval = 1_000) => {
         let unsubscribeRef: Fn;
-        let timeout: number;
+        let timeout: ReturnType<typeof setTimeout>;
         const dispose = compose(
             () => this.tryDispose(),
             () => unsubscribeRef(),

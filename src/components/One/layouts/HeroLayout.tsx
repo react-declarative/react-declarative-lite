@@ -15,7 +15,7 @@ import Group, { IGroupProps } from '../../../components/common/Group';
 
 import useElementSize from '../../../hooks/useElementSize';
 
-import { ISizeCallback } from '../../../model/ISize';
+import type { ISizeCallback } from '../../../model/ISize';
 import IEntity from '../../../model/IEntity';
 
 import makeLayout from '../components/makeLayout/makeLayout';

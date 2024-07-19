@@ -1,5 +1,7 @@
 import Observer, { TObserver, LISTEN_CONNECT } from "../Observer";
 
+declare var setTimeout: any;
+
 /**
  * Creates a delayed observer that emits a void value after a specified delay.
  *
@@ -7,7 +9,7 @@ import Observer, { TObserver, LISTEN_CONNECT } from "../Observer";
  * @returns - The delayed observer instance.
  */
 export const fromDelay = (delay: number): TObserver<void> => {
-    let timeout: NodeJS.Timer | undefined;
+    let timeout: ReturnType<typeof setTimeout> | undefined;
     const observer = new Observer<void>(() => {
         if (timeout !== undefined) {
             clearTimeout(timeout);
