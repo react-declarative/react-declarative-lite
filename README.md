@@ -21,7 +21,7 @@ npm install react-declarative-lite
 
 ## Example
 
-```
+```tsx
 import { One, TypedField, FieldType, getInvalidFields } from "react-declarative-lite";
 
 export const fields: TypedField[] = [
