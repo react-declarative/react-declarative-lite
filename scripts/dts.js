@@ -3,7 +3,6 @@ const rimraf = require("rimraf");
 const fs = require('fs');
 
 const { createMinifier } = require("dts-minify");
-const prettierSync = require("@prettier/sync");
 const ts = require("typescript");
 
 const minifier = createMinifier(ts);
@@ -13,29 +12,12 @@ dts.bundle({
     main: 'dist/types/index.d.ts',
 });
 
-// @description remove this comment to enable d.ts minification
-// const typedef = minifier.minify(fs.readFileSync('dist/types/react-declarative.d.ts').toString());
-// fs.writeFileSync('dist/types/react-declarative.d.ts', typedef);
-
-const formatdef = prettierSync.format(fs.readFileSync('dist/types/react-declarative.d.ts').toString(), {
-    semi: true,
-    endOfLine: "auto",
-    trailingComma: "all",
-    singleQuote: false,
-    printWidth: 80,
-    tabWidth: 2,
-    parser: 'typescript',
-});
-fs.writeFileSync('dist/types/react-declarative.d.ts', formatdef)
+const typedef = minifier.minify(fs.readFileSync('dist/types/react-declarative.d.ts').toString());
+fs.writeFileSync('dist/types/react-declarative.d.ts', typedef);
 
 fs.copyFileSync(
     'dist/types/react-declarative.d.ts',
     'dist/index.d.ts',
-);
-
-fs.copyFileSync(
-    'dist/common/index.js',
-    'dist/index.js',
 );
 
 fs.copyFileSync(
@@ -49,5 +31,4 @@ fs.existsSync("demo") && fs.copyFileSync(
 );
 
 rimraf.sync("dist/types");
-rimraf.sync("dist/common");
 rimraf.sync("dist/modern");

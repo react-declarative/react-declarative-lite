@@ -11,13 +11,3 @@ esbuild.build({
   target: 'chrome70',
   plugins: [nodeExternalsPlugin()],
 });
-
-esbuild.build({
-  entryPoints: ['src/index.ts'],
-  outdir: 'dist/common',
-  bundle: true,
-  minify: true,
-  format: 'cjs',
-  target: 'chrome70',
-  plugins: [nodeExternalsPlugin()],
-});

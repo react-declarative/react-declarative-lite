@@ -1,5 +1,5 @@
 {
-  "name": "react-declatative-lite",
+  "name": "react-declarative-lite",
   "version": "2.6.132",
   "description": "A lighter version of the react-declarative which exports the <One /> component and dependencies only and as such makes the library slightly faster and smaller. Unlike react-declarative, it doesn't provide any additional overhead like state management. For a note, that library should be used when you want to use <One /> forms in existing app",
   "private": false,
@@ -42,12 +42,11 @@
   "bugs": {
     "url": "https://github.com/react-declarative/react-declarative-lite/issues"
   },
-  "main": "dist/index.js",
+  "main": "dist/index.modern.js",
   "module": "dist/index.modern.js",
   "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "exports": {
-    "require": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "import": "./dist/index.modern.js",
     "default": "./dist/index.modern.js"
@@ -79,7 +78,6 @@
     "tss-react": ">=4.3.4"
   },
   "devDependencies": {
-    "@prettier/sync": "0.5.1",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "@types/uuid": "8.3.4",
