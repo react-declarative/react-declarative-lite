@@ -202,6 +202,7 @@ export { getAvailableFields } from './utils/getAvailableFields';
 export { getInitialData } from './utils/getInitialData';
 export { getInvalidFields } from './utils/getInvalidFields';
 export { getFieldsError } from './utils/getFieldsError';
+export { getFieldVariant } from './utils/getFieldVariant';
 
 export { isInvalidFieldData } from './utils/isInvalidFieldData';
 
