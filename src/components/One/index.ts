@@ -16,4 +16,7 @@ export { OtherComboSlot } from './other/OtherComboSlot';
 export { OtherItemsSlot } from './other/OtherItemsSlot';
 export { default as OneSlotFactory } from './components/SlotFactory';
 export { defaultSlots as OneDefaultSlots } from './components/SlotFactory';
+export { isBaseline } from './config/isBaseline';
+export { isBaselineSimple } from './config/isBaselineSimple';
+export { isBaselineForField as isBaselineForRoot } from './config/isBaseline'; 
 export { default } from './One';

@@ -84,6 +84,9 @@ export { One, OneTyped, OneConfig } from './components';
 
 export { Tile, TileCheckbox } from './components';
 export { OneSlotFactory, OneDefaultSlots } from './components';
+
+export { isBaseline, isBaselineSimple, isBaselineForRoot } from './components';
+
 export { NoSsr } from './components';
 
 export { OtherComboSlot } from './components';
