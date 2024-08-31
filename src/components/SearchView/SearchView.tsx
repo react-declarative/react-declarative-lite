@@ -51,6 +51,9 @@ const useStyles = makeStyles()({
     minWidth: 290,
     maxHeight: '45vh',
     scrollbarWidth: 'none',
+    "&::-webkit-scrollbar": {
+      display: "none",
+    },
     overflowY: 'auto',
     overflowX: 'hidden',
   },

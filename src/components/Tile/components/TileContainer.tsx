@@ -56,7 +56,7 @@ const useStyles = makeStyles()((theme) => ({
         )}`,
         scrollbarWidth: "none",
         "&::-webkit-scrollbar": {
-            display: "none",
+          display: "none",
         },
     },
     headerLabel: {
