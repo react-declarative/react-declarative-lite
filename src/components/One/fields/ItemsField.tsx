@@ -161,6 +161,7 @@ export interface IItemsFieldPrivate<Data = IAnything> {
   value: PickProp<IManaged<Data>, 'value'>;
   dirty: PickProp<IManaged<Data>, "dirty">;
   invalid: PickProp<IManaged<Data>, "invalid">;
+  loading: PickProp<IManaged<Data>, "loading">;
   incorrect: PickProp<IManaged<Data>, "incorrect">;
   fieldReadonly: PickProp<IManaged<Data>, "fieldReadonly">;
   withContextMenu: PickProp<IManaged<Data>, "withContextMenu">;
@@ -205,6 +206,7 @@ export const ItemsField = ({
   labelShrink,
   watchItemList,
   noDeselect,
+  loading,
   dirty,
   invalid,
   incorrect,
@@ -230,6 +232,7 @@ export const ItemsField = ({
     freeSolo={freeSolo}
     dirty={dirty}
     invalid={invalid}
+    loading={loading}
     incorrect={incorrect}
     title={title}
     tr={tr}

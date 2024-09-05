@@ -92,6 +92,12 @@ export interface ITreeFieldProps<Data = IAnything, Payload = IAnything> {
    * @typedef ItemTree
    */
   itemTree?: PickProp<IField<Data, Payload>, 'itemTree'>;
+  /**
+   * Represents the change detection flag for item tree
+   *
+   * @typedef boolean
+   */
+  watchItemTree?: PickProp<IField<Data, Payload>, 'watchItemTree'>;
 }
 
 /**
@@ -148,6 +154,7 @@ export const TreeField = ({
   loading,
   onChange,
   name,
+  watchItemTree,
   withContextMenu,
 }: ITreeFieldProps & ITreeFieldPrivate) => (
   <Tree
@@ -159,6 +166,7 @@ export const TreeField = ({
     description={description}
     outlined={outlined}
     title={title}
+    watchItemTree={watchItemTree}
     placeholder={placeholder}
     withContextMenu={withContextMenu}
     itemTree={itemTree}

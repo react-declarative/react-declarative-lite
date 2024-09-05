@@ -87,6 +87,7 @@ export const Items = ({
     itemList = [],
     freeSolo,
     noDeselect,
+    loading: upperLoading,
     virtualListBox,
     watchItemList,
     labelShrink,
@@ -362,7 +363,7 @@ export const Items = ({
         );
     };
 
-    if (loading || !initComplete.current) {
+    if (loading || !initComplete.current || upperLoading) {
         return (
             <Autocomplete
                 multiple

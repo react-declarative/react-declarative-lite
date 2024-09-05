@@ -94,6 +94,7 @@ export const Combo = ({
   placeholder = "",
   outlined = false,
   itemList = [],
+  loading: upperLoading,
   virtualListBox,
   watchItemList,
   labelShrink,
@@ -345,7 +346,7 @@ export const Combo = ({
     changeSubject.next();
   };
 
-  if (loading || !initComplete.current) {
+  if (loading || !initComplete.current || upperLoading) {
     return (
       <Autocomplete
         disableCloseOnSelect
