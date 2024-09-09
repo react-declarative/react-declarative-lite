@@ -1,34 +1,44 @@
 const dts = require('dts-bundle');
 const rimraf = require("rimraf");
+const glob = require("glob");
+const path = require("path");
 const fs = require('fs');
 
-const { createMinifier } = require("dts-minify");
-const ts = require("typescript");
-
-const minifier = createMinifier(ts);
+const prettierSync = require("@prettier/sync");
 
 dts.bundle({
     name: 'react-declarative-lite',
-    main: 'dist/types/index.d.ts',
+    main: 'dist/index.d.ts',
 });
 
-const typedef = minifier.minify(fs.readFileSync('dist/types/react-declarative-lite.d.ts').toString());
-fs.writeFileSync('dist/types/react-declarative-lite.d.ts', typedef);
-
-fs.copyFileSync(
-    'dist/types/react-declarative-lite.d.ts',
-    'dist/index.d.ts',
-);
-
-fs.copyFileSync(
-    'dist/modern/index.js',
-    'dist/index.modern.js',
-);
+const formatdef = prettierSync.format(fs.readFileSync('dist/react-declarative-lite.d.ts').toString(), {
+    semi: true,
+    endOfLine: "auto",
+    trailingComma: "all",
+    singleQuote: false,
+    printWidth: 80,
+    tabWidth: 2,
+    parser: 'typescript',
+});
+fs.writeFileSync('dist/react-declarative-lite.d.ts', formatdef)
 
 fs.existsSync("demo") && fs.copyFileSync(
     'dist/index.d.ts',
-    'demo/src/react-declarative-lite.d.ts',
+    'demo/react-declarative-lite.d.ts',
 );
 
-rimraf.sync("dist/types");
-rimraf.sync("dist/modern");
+glob.sync("./dist/**/*.js.map").forEach((file) => {
+    rimraf.sync(file);
+});
+
+glob.sync("./dist/**/*.d.ts").forEach((file) => {
+    const fileName = path.basename(file);
+    fileName !== "react-declarative-lite.d.ts" && rimraf.sync(file);
+});
+
+glob.sync("./dist/*").forEach((file) => {
+    fs.lstatSync(file).isDirectory() && rimraf.sync(file); 
+});
+
+fs.renameSync("./dist/react-declarative-lite.d.ts", "./dist/index.d.ts")
+
