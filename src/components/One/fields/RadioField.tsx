@@ -90,6 +90,7 @@ export const RadioField = ({
   disabled,
   value,
   onChange,
+  readonly,
   title,
   radioValue,
   name = '',
@@ -98,6 +99,7 @@ export const RadioField = ({
     value={value}
     disabled={disabled}
     onChange={onChange}
+    readonly={readonly}
     title={title}
     radioValue={radioValue}
     name={name}
