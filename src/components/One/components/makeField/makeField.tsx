@@ -21,7 +21,8 @@ import { useOnePayload } from '../../context/PayloadProvider';
 import { useOneState } from '../../context/StateProvider';
 import { useOneMenu } from '../../context/MenuProvider';
 
-import useDebounce from '../../hooks/useDebounce';
+import useDebounceValue from '../../hooks/useDebounceValue';
+import useActualCallback from '../../../../hooks/useActualCallback';
 
 import useManagedCompute from './hooks/useManagedCompute';
 import useFieldMemory from './hooks/useFieldMemory';
@@ -231,8 +232,6 @@ export function makeField(
 
         const compute = useManagedCompute({
             compute: upperCompute,
-            getObjectRef,
-            payload,
             shouldRecompute,
         });
 
@@ -286,7 +285,7 @@ export function makeField(
 
         const debounceSpeed = useDebounceConfig(oneConfig);
 
-        const [debouncedValue, { pending, flush }] = useDebounce(
+        const [debouncedValueRef, dispatchDebouncedValue, { pending, flush }] = useDebounceValue(
             value,
             fieldConfig.skipDebounce ? 0 : debounceSpeed
         );
@@ -295,8 +294,8 @@ export function makeField(
             prefix,
             name,
             clickDisabled: fieldDisabled || disabled,
-            lastDebouncedValue: debouncedValue,
-            debouncedValue$: debouncedValue,
+            lastObject: null,
+            debouncedValue$: debouncedValueRef.value,
             fieldReadonly$: fieldReadonly,
             focusReadonly$: focusReadonly,
             invalid$: invalid,
@@ -309,8 +308,9 @@ export function makeField(
          * После первого вызова setValue мы должны начать
          * проверять входящую валидацию
          */
-        const setValue = useCallback((value: Value) => {
+        const setValue = useActualCallback((value: Value) => {
             setValueAction(value);
+            dispatchDebouncedValue(value);
             memory.initComplete = true;
         }, []);
 
@@ -504,13 +504,24 @@ export function makeField(
                 flush();
                 return;
             }
-            if (memory.lastDebouncedValue === debouncedValue) {
+            /**
+             * Изменение любого поля меняет ссылку целевого объекта. 
+             * Это позволяет производительно определить направление изменения 
+             */
+            if (memory.lastObject !== object) {
                 handleIncomingObject();
                 handleWasInvalid();
             }
             handleOutgoingObject();
-            memory.lastDebouncedValue = debouncedValue;
-        }, [debouncedValue, object]);
+            memory.lastObject = object;
+            /**
+             * Объект debouncedValueRef оборачивает примитив для сохранения логики
+             * сопоставления по ссылке, а не значению.
+             * 
+             * Коллбек compute, вернувший два раза одно и тоже
+             * значение сохранит двойное срабатывание очереди
+             */
+        }, [debouncedValueRef, object]);
 
         /*
          * Флаг readonly позволяет управлять автокомплитом формы. На мобильных
