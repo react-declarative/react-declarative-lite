@@ -209,6 +209,8 @@ export { getInvalidFields } from './utils/getInvalidFields';
 export { getFieldsError } from './utils/getFieldsError';
 export { getFieldVariant } from './utils/getFieldVariant';
 
+export { useDebounce } from './components/One/hooks/useDebounce';
+
 export { isInvalidFieldData } from './utils/isInvalidFieldData';
 
 import type TSubjectInternal from './model/TSubject';
