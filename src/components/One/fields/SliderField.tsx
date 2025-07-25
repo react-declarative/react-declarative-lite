@@ -108,6 +108,17 @@ export interface ISliderFieldProps<Data = IAnything, Payload = IAnything>  {
    * @returns - The value of the `sliderRailColor` property.
    */
   sliderRailColor?: PickProp<IField<Data, Payload>, 'sliderRailColor'>;
+  
+  /**
+   * Defines custom steps for the slider component.
+   *
+   * @typedef sliderSteps
+   * @property [sliderSteps] - An array of values representing the discrete steps the slider can take.
+   * If provided, the slider will only allow selection of these specific values.
+   */
+  sliderSteps?: PickProp<IField<Data, Payload>, 'sliderSteps'>;
+
+  
   /**
    * Represents the optional property 'groupRef' of an object of type `IField<Data, Payload>`.
    *
@@ -172,6 +183,7 @@ export const SliderField = ({
   stepSlider,
   maxSlider,
   minSlider,
+  sliderSteps,
   labelFormatSlider,
   leadingIconTabIndex,
   trailingIconTabIndex,
@@ -189,6 +201,7 @@ export const SliderField = ({
     stepSlider={stepSlider}
     maxSlider={maxSlider}
     minSlider={minSlider}
+    sliderSteps={sliderSteps}
     leadingIconTabIndex={leadingIconTabIndex}
     trailingIconTabIndex={trailingIconTabIndex}
   />
